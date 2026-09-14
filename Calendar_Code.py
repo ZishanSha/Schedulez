@@ -8,7 +8,7 @@ month = today.month
 day = today.day
 
 list_of_tasks = [
-    [True, "September", 15, "Sunday", "Homework", "Homework due every Sunday!"], 
+    [True, "October", 15, "Sunday", "Homework", "Homework due every Sunday!"], 
     [False, "October", 31, "Tuesday", "Halloween", "It's Halloween!"], 
     [False, "August", 24, "Thursday", "Birthday", "My Birthday!"] ]
 
@@ -39,7 +39,7 @@ def print_tasks(_month):
         repeats, task_month, task_day, day_name, task_name, description = task
         print(f"Task Name: {task_name} \nTask Description: {description}")
         if repeats:
-            print(f"Next Occurrence of Task: {day_name}, {task_day}\n")
+            print(f"Next Occurrence of Task: {day_name}\n")
         else:
             print(f"Date of Task: {task_month} {task_day}, {day_name}\n")
 
@@ -55,3 +55,21 @@ def print_tasks(_month):
 
 print_calender(year, month, day)
 print_tasks(month)
+
+def new_task():
+     taskname = input("What task would you like to add? \n")
+     taskdescription = input("What description would you give your taks? \n")
+     taskmonth = input("What month is your task due? \n")
+     taskday = int(input("What day is your task due? \n"))
+     isrepeatable = input("Is the task repeatable? (Y/N) \n")
+
+     monthnumber = list(calendar.month_name).index(taskmonth)
+
+     date_obj = datetime.strptime(f"{today.year}-{monthnumber}-{taskday}", "%Y-%m-%d")
+
+
+     list_of_tasks.append([isrepeatable == "Y", taskmonth, taskday, date_obj.strftime("%A"), taskname, taskdescription])
+     print_tasks(month)
+
+
+new_task()
